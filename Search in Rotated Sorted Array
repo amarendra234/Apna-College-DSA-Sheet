@@ -1,0 +1,34 @@
+class Solution {
+    public int binary_search(int[] arr,int l,int r,int target){
+        while(l<=r){
+            int mid=l+(r-l)/2;
+            if(arr[mid]==target){
+                return mid;
+            }else if(arr[mid]>target){
+                r=mid-1;
+            }else{
+                l=mid+1;
+            }
+        }
+        return -1;
+    }
+    public int pivot_index(int [] arr){
+        int l=0;
+        int r=arr.length-1;
+        while(l<r){
+            int mid=l+(r-l)/2;
+            if(arr[mid]>=arr[arr.length-1]){
+                l=mid+1;
+            }else{
+                r=mid;
+            }
+        }
+        return l;
+    }
+    public int search(int[] nums, int target) {
+        int index=pivot_index(nums);
+        int leftans=binary_search(nums,0,index-1,target);
+        int rightans=binary_search(nums,index,nums.length-1,target);
+        return Math.max(leftans,rightans);
+    }
+}
